@@ -87,6 +87,6 @@ Les commandes ``github init``, ``git branch`` et ``git remote``, ``add origin`` 
 Une fois que ces commandes ont été faites, pendant  le reste du développement de votre projet, vous pouvez utiliser les commandes suivantes : ``git commit -m "message de modification"``, ``git add NomDuFichierModifié``, ``git push``.
 
 Cest ces trois commandes que vous utiliserez à chaque fois :
-* ``git commit -m "message de modification"``
 * ``git add NmDuFichierModifié"``
+* ``git commit -m "message de modification"``
 * ``git push``
