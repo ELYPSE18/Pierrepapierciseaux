@@ -5,6 +5,7 @@ from PIL import Image, ImageTk
 # Création de la fenêtre principale
 fenetre = tk.Tk()
 fenetre.title("Pierre - Papier - Ciseaux")
+fenetre.configure(bg="red")
 
 # Fonction qui choisi au hasard pour l'ordinateur
 def computer_choice():
@@ -13,6 +14,8 @@ def computer_choice():
 
 # Fonction qui permet de lancer le jeu
 def play(user_choice):
+    nbDeCoups.set(nbDeCoups.get() + 1) # ajout 1 au nombre de coup
+
     computer = computer_choice() #Fait appel à la fonction qui choisi aléatoirement pour le PC
 
     # Logique pour déterminer le gagnant
@@ -36,6 +39,48 @@ def play(user_choice):
     # Ajouter les choix à l'historique (du plus récent au plus ancien)
     history_listbox.insert(0, f"Vous : {user_choice} - Ordinateur : {computer}")
 
+    verify_victory()
+
+    #permet de savoir si l utilisateru peut continuer à jouer
+def verify_victory():
+    #test si le nombre de coups est > 10
+    if nbDeCoups.get() >= 10:
+        #il faut décider quoi faire quand on arrive à 10 coups
+        # par exemple, comparer les scores et dire qui a gagner entre joueur ou ordi
+        #ajouter un bouton pour reset les scores à 0
+        #quitter la fenêtre
+        if player_score_var.get() > computer_score_var.get():
+            result_var.set("Félicitation, vous avez gagné")
+        elif player_score_var.get() < computer_score_var.get():
+            result_var.set("dommage, l'ordinateur à gagné")
+        else:
+            result_var.set("match nul")
+
+        #désactiver les bouton pour empécher de jouer
+        rock_button.config(state=tk.DISABLED)
+        paper_button.config(state=tk.DISABLED)
+        scissors_button.config(state=tk.DISABLED)
+
+        # Bouton pour réinitialiser les scores et continuer à jouer
+        reset_button.pack(pady=10)
+
+def reset_scores():
+    nbDeCoups.set(0)
+    player_score_var.set(0)
+    computer_score_var.set(0)
+    result_var.set("")
+    history_listbox.delete(0, tk.END)
+
+    
+    user_img_label.config(image=empty_img)
+    computer_img_label.config(image=empty_img)
+    
+    reset_button.pack_forget()
+
+     #activer les bouton pour empécher de jouer
+    rock_button.config(state=tk.NORMAL)
+    paper_button.config(state=tk.NORMAL)
+    scissors_button.config(state=tk.NORMAL)
 
 # Afficher une image en fonction du choix
 def get_image(choice):
@@ -50,11 +95,14 @@ def get_image(choice):
 result_var = tk.StringVar()
 player_score_var = tk.IntVar()
 computer_score_var = tk.IntVar()
+nbDeCoups = tk.IntVar(value=0)# permet d' arreter 
     
 # Charger les images
 rock_img = ImageTk.PhotoImage(Image.open("pierre.gif"))
 paper_img = ImageTk.PhotoImage(Image.open("papier.gif"))
 scissors_img = ImageTk.PhotoImage(Image.open("ciseaux.gif"))
+empty_img = ImageTk.PhotoImage(Image.new("RGBA", (0, 0), (255, 0, 0, 0))) # Création d'une image vide  en taille 0x0 et totalement transparente
+
 
 # Création des widget avec les images
 user_label = tk.Label(fenetre, text="Choisissez : ")
@@ -101,6 +149,8 @@ history_label.pack(pady=10)
 
 history_listbox = tk.Listbox(fenetre, width=40, height=6)
 history_listbox.pack()
+
+reset_button = tk.Button(fenetre,text="Nouvelle partie", command=reset_scores)
 
 
 fenetre.mainloop()
