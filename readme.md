@@ -128,4 +128,67 @@ Relatif à l'issue #123.
 Pour la rédaction de vos fichiers Readme, n'hésitez pas à vous pencher sur la documentation markdown. Voici un lien pour vous aider :
 [Lien pour apprendre le markdown](https://programminghistorian.org/fr/lecons/debuter-avec-markdown)
 
-# Modifié par Jean-Louis ERRANTE pour l'exercice sur les PR
+![Texte associé à l'image](pierre.gif)
+
+# Pull request (Pr)
+
+C'est une fonctionnalité clé des systemes de gestion de version bassées sur Github, gitLab, Bitbucket..
+Elle represente une demande de fusion des modificatons (commits) d'une branche vers une autre, généralement de la branche d'une fonctionnalité vers la branche principale d'un projet.
+
+## Concept de  la Pull Request (PR)
+
+Collaboration et revue de code : La Pr n'est pas seulement un mécanisque de fusion de code. c'est aussi un outil de collaboration. Lorsqu'un développeur soumet un PR, d'autres membres de l'équipe peuvent la consulter, laisser des commentaires, suggérer des modifications et même proposer des commits pour améliorer la PR avant qu'elle ne soit fusionnée.
+
+**Point de contrôle :** Avaant la fusion, la PR fournit un point de contrôle pour s'assurer que le code respsecte les nombres de qulité, passe tous les tests et n'introduit pas de régressions.
+
+**Intégration avec CI/CD :** Les pull sont souvent intégrées avec des outils d'intégration continue et de livraison continue (CI/CD). Lorsqu'une pr est soumise, des tests automatisés peuvent être declenchés, et le résultat de ces tests est souvent signalé directement dans l'interface de la PR.
+
+## Faire une pull request
+## Fork du repository
+Avant de pouvoir  soumettre une PR, vous devez avoir une copie du repository sur votre compte. Si ce n'est pas déja fait :
+
+1. Rendez-vous sur la page Github du projet auquel vous voulez contribuer.
+2. Cliquez sur le bouton "Fork" en haut à droite de la page. Cela créera une copie du projet sur votre compte Github personnel.
+
+## Clonez votre Fork
+Clonez votre fork sur votre machine : 
+```
+git clone URL_DU_REPO_A_CLONER
+git clone https://github.com/ELYPSE18/Pierrepapierciseaux
+```
+
+## Créez une nouvelle branche
+Il est conseillé de créer une nouvelle branche pour chaque nouvelle fonctionnalité ou correction. Cela vous permet de garder le travail organisé et séparé.
+
+Pour créer une nouvelle branche , vous devez utiliser la commande ``git checkout -b``
+
+```
+git checkout -b nom_de_la_brache
+git checkout -b fonctionnalite_timer
+```
+
+## Apportez les modifications
+MOdifiez le fichiers nécessaires et ajoutes les à l'index : 
+```
+git add nom_du_fichier
+```
+ou pour ajouter tous les fichiers modifiés :
+```
+git add
+```
+Ensuite, faites un commit de vos modifications"
+```
+git commit -m "Description des modifications"
+```
+## Pousser la branche vers le fork
+```
+git push origin nom_de_la_branche
+```
+## Créez le pull request
+1. Allez sur la page github de votre fork
+2. Cliquez sur le bouton "New pull request"
+3. Séléctionnez votre nouvelle branche dans le menu déroulant "compare"
+4. Assurez-vous que la branche de base (**main**) est celle du projet original et non celle du projet original et non celle de votre fork
+5. Vérifiez vos modifications et cliquez sur "Creat pull request"
+6. Donnez un titre à votre PR et décrivez vos modifications ou les raisons de votre PR
+7. Cliquez sur "Create pull request" pour soumettre votre pr
